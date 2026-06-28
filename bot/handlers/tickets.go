@@ -131,8 +131,7 @@ func (h *TicketHandler) handleModalSubmit(s *discordgo.Session, i *discordgo.Int
 	for _, roleName := range config.StaffRoleNames {
 		for _, ch := range channels {
 			if strings.EqualFold(ch.Name, roleName) || strings.EqualFold(ch.Name, roleName) {
-				// Find role ID from roles
-			}
+							}
 		}
 		roleID := findRoleIDByName(s, guildID, roleName)
 		if roleID != "" {

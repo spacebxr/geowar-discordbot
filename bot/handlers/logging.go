@@ -71,8 +71,7 @@ func (h *LoggingHandler) HandleMessageUpdate(s *discordgo.Session, m *discordgo.
 		return
 	}
 
-	// Fetch the previous version
-	msg, err := s.State.Message(m.ChannelID, m.ID)
+		msg, err := s.State.Message(m.ChannelID, m.ID)
 	if err != nil {
 		return
 	}

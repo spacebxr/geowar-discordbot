@@ -13,7 +13,6 @@ type Bot struct {
 	Logging      *handlers.LoggingHandler
 	Welcome      *handlers.WelcomeHandler
 	Reaction     *handlers.ReactionRoleHandler
-	AutoMod      *handlers.AutoModHandler
 	ServerStatus *commands.ServerStatusCmd
 }
 
@@ -25,7 +24,6 @@ func New(s *discordgo.Session) *Bot {
 		Logging:      handlers.NewLoggingHandler(s),
 		Welcome:      handlers.NewWelcomeHandler(s),
 		Reaction:     handlers.NewReactionRoleHandler(s),
-		AutoMod:      handlers.NewAutoModHandler(s),
 		ServerStatus: commands.NewServerStatusCmd(),
 	}
 	return b
@@ -35,7 +33,6 @@ func (b *Bot) MessageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Author.Bot || m.Author.ID == s.State.User.ID {
 		return
 	}
-	b.AutoMod.HandleMessage(s, m)
 	b.Commands.HandleMessageCreate(s, m)
 }
 

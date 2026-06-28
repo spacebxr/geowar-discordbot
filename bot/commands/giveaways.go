@@ -118,8 +118,7 @@ func rerollGiveaway(s *discordgo.Session, m *discordgo.MessageCreate, args []str
 
 	var winnersList []string
 	for i := 0; i < winners && i < len(entries); i++ {
-		// In a real scenario, use proper random selection
-		winnersList = append(winnersList, fmt.Sprintf("<@%s>", entries[i]))
+				winnersList = append(winnersList, fmt.Sprintf("<@%s>", entries[i]))
 	}
 
 	s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("🎉 New winners: %s! Congratulations on winning the giveaway!", strings.Join(winnersList, ", ")))
