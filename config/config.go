@@ -23,6 +23,7 @@ var (
 	SuggestionsChannel = "suggestions"
 	ReportsChannel     = "reports"
 	RulesChannel       = "rules"
+	WarDeclarationsChannel = "1514653247074471936"
 
 	ModRoleName   = "Mod"
 	AdminRoleName = "Admin"

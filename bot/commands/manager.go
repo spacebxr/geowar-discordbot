@@ -35,6 +35,7 @@ func New(s *discordgo.Session) *CommandManager {
 	cm.Register(NewGiveawayCommands(s))
 	cm.Register(NewAdminCommands(s, cm))
 	cm.Register(NewServerStatusCommand())
+	cm.Register(NewWarCommand())
 	return cm
 }
 

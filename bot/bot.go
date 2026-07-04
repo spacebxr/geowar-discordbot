@@ -14,6 +14,7 @@ type Bot struct {
 	Welcome      *handlers.WelcomeHandler
 	Reaction     *handlers.ReactionRoleHandler
 	ServerStatus *commands.ServerStatusCmd
+	War          *commands.WarCmd
 }
 
 func New(s *discordgo.Session) *Bot {
@@ -25,6 +26,7 @@ func New(s *discordgo.Session) *Bot {
 		Welcome:      handlers.NewWelcomeHandler(s),
 		Reaction:     handlers.NewReactionRoleHandler(s),
 		ServerStatus: commands.NewServerStatusCmd(),
+		War:          commands.NewWarCmd(),
 	}
 	return b
 }
@@ -63,8 +65,22 @@ func (b *Bot) InteractionCreate(s *discordgo.Session, i *discordgo.InteractionCr
 		switch name {
 		case "serverstatus":
 			b.ServerStatus.HandleSlash(s, i)
+		case "declarewar":
+			b.War.HandleSlash(s, i)
 		}
 		return
+	}
+	if i.Type == discordgo.InteractionModalSubmit {
+		if i.ModalSubmitData().CustomID == "war_modal" {
+			b.War.HandleModalSubmit(s, i)
+			return
+		}
+	}
+	if i.Type == discordgo.InteractionMessageComponent {
+		if i.MessageComponentData().CustomID == "declarewar_prompt" {
+			b.War.HandleSlash(s, i)
+			return
+		}
 	}
 	b.Tickets.HandleInteraction(s, i)
 	b.Reaction.HandleInteraction(s, i)

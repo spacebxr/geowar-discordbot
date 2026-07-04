@@ -49,6 +49,16 @@ func main() {
 		} else {
 			fmt.Println("Registered /serverstatus slash command")
 		}
+
+		_, err = s.ApplicationCommandCreate(s.State.User.ID, "", &discordgo.ApplicationCommand{
+			Name:        "declarewar",
+			Description: "Submit a war declaration request",
+		})
+		if err != nil {
+			fmt.Printf("Failed to register slash command: %v\n", err)
+		} else {
+			fmt.Println("Registered /declarewar slash command")
+		}
 	})
 
 	if err := dg.Open(); err != nil {
